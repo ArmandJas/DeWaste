@@ -14,7 +14,7 @@ namespace DeWaste.WebServices
         IServiceProvider container;
         ILogger logger;
 
-        string url = "http://localhost:5000/";
+        string url = "http://localhost:5159/";
 
         public DatabaseApi(IServiceProvider container)
         {

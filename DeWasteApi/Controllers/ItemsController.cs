@@ -25,21 +25,21 @@ namespace DeWasteApi.Controllers
         [HttpGet]
         public async Task<IActionResult> Index()
         {
-            return _context.items != null ?
-                        Json(await _context.items.ToListAsync()) :
-                        Problem("Entity set 'DeWasteDbContext.Items'  is null.");
+            return _context.item != null ?
+                        Json(await _context.item.ToListAsync()) :
+                        Problem("Entity set 'DeWasteDbContext.item'  is null.");
         }
 
         // GET: Items/Details/5
         [HttpGet("{id}")]
         public async Task<IActionResult> Details(long? id)
         {
-            if (id == null || _context.items == null)
+            if (id == null || _context.item == null)
             {
                 return NotFound();
             }
 
-            var item = await _context.items
+            var item = await _context.item
                 .FirstOrDefaultAsync(m => m.id == id);
             if (item == null)
             {
