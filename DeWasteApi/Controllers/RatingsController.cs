@@ -35,7 +35,7 @@ namespace DeWasteApi.Controllers
             }
 
             var rating = _context.rating
-                .FirstOrDefault(m => m.comment_id == comment_id && m.user_id == user_id);
+                .FirstOrDefault(m => m.comment_id == comment_id && m.user_id.ToString() == user_id);
 
             return Json(rating);
         }
@@ -85,7 +85,7 @@ namespace DeWasteApi.Controllers
                 return NotFound();
             }
 
-            var rating = _context.rating.FirstOrDefault(x => x.comment_id == comment_id && x.user_id == user_id);
+            var rating = _context.rating.FirstOrDefault(x => x.comment_id == comment_id && x.user_id.ToString() == user_id);
             if (rating == null)
             {
                 return NotFound();

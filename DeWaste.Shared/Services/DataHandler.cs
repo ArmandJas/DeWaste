@@ -22,7 +22,7 @@ namespace DeWaste.Services
 
         private Dictionary<int, Item> items = new Dictionary<int, Item>();
 
-        private string UID = null;
+        private Guid UID = Guid.Empty;
 
 
         private string suggestionsPath = "suggestions.json";
@@ -43,17 +43,22 @@ namespace DeWaste.Services
         {
             try
             {
-                UID = await fileHandler.ReadFileContentsAsync(idPath);
-                if (StringIsNullOrEmpty(UID))
+                var str_id = await fileHandler.ReadFileContentsAsync(idPath);
+
+                if (StringIsNullOrEmpty(str_id))
                 {
-                    UID = Guid.NewGuid().ToString();
-                    await fileHandler.WriteDataToFileAsync(idPath, UID);
+                    UID = Guid.NewGuid();
+                    await fileHandler.WriteDataToFileAsync(idPath, UID.ToString());
+                }
+                else
+                {
+                    UID = Guid.Parse(str_id);
                 }
             }
             catch (Exception ex)
             {
                 logger.Log(ex.Message);
-                UID = "Test";
+                //UID = "Test";
             }
         }
 
@@ -183,9 +188,9 @@ namespace DeWaste.Services
 
             foreach (Comment comment in comments)
             {
-                comment.Date = DateTimeOffset.FromUnixTimeSeconds(comment.timestamp).ToLocalTime().ToString();
+                comment.Date = comment.timestamp.ToLocalTime().ToString("g");
                 comment.isUsersComment = comment.user_id == UID;
-                Rating rating = await databaseApi.GetRating(comment.id, UID);
+                Rating rating = await databaseApi.GetRating(comment.id, UID.ToString());
                 if (rating != null)
                 {
                     if (rating.is_liked)
@@ -212,11 +217,11 @@ namespace DeWaste.Services
                 content = content,
                 item_id = item_id,
                 user_id = UID,
-                timestamp = DateTimeOffset.Now.ToUnixTimeSeconds()
+                timestamp = DateTimeOffset.UtcNow
             };
             Comment received = await databaseApi.PostComment(comment);
 
-            received.Date = DateTimeOffset.FromUnixTimeSeconds(comment.timestamp).ToLocalTime().ToString();
+            received.Date = comment.timestamp.ToLocalTime().ToString("g");
             received.isUsersComment = comment.user_id == UID;
 
             return received;
@@ -240,7 +245,7 @@ namespace DeWaste.Services
             {
                 comment.isLiked = false;
                 comment.likes--;
-                await databaseApi.DeleteRating(comment.id, UID);
+                await databaseApi.DeleteRating(comment.id, UID.ToString());
             }
             else if(comment.isDisliked)
             {
@@ -260,7 +265,7 @@ namespace DeWaste.Services
             }
 
             Comment newComment = await databaseApi.UpdateComment(comment);
-            newComment.Date = DateTimeOffset.FromUnixTimeSeconds(newComment.timestamp).ToLocalTime().ToString();
+            newComment.Date = newComment.timestamp.ToLocalTime().ToString("g");
             newComment.isLiked = comment.isLiked;
             newComment.isDisliked = comment.isDisliked;
             newComment.isUsersComment = newComment.user_id == UID;
@@ -280,7 +285,7 @@ namespace DeWaste.Services
             {
                 comment.isDisliked = false;
                 comment.dislikes--;
-                await databaseApi.DeleteRating(comment.id, UID);
+                await databaseApi.DeleteRating(comment.id, UID.ToString());
             }
             else if (comment.isLiked)
             {
@@ -300,7 +305,7 @@ namespace DeWaste.Services
             }
 
             Comment newComment = await databaseApi.UpdateComment(comment);
-            newComment.Date = DateTimeOffset.FromUnixTimeSeconds(newComment.timestamp).ToLocalTime().ToString();
+            newComment.Date = newComment.timestamp.ToLocalTime().ToString("g");
             newComment.isLiked = comment.isLiked;
             newComment.isDisliked = comment.isDisliked;
             newComment.isUsersComment = newComment.user_id == UID;

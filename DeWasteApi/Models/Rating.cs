@@ -6,7 +6,7 @@ namespace DeWasteApi.Models
     {
         public int id { get; set; }
         public int comment_id { get; set; }
-        public string user_id { get; set; }
+        public Guid user_id { get; set; }
         public bool is_liked { get; set; }
     }
 }
