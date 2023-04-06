@@ -87,6 +87,10 @@
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\Items\plastic_wrap.jpg" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\Items\postcard.jpg" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\logo.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Images\reactions\dislike_active.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Images\reactions\dislike_inactive.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Images\reactions\like_active.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Images\reactions\like_inactive.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\recycling_s_icons\alu_41.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\recycling_s_icons\c_80.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\recycling_s_icons\c_81.png" />
