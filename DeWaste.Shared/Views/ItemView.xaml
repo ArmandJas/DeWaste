@@ -1497,16 +1497,22 @@
                                     </Grid.ColumnDefinitions>
                                     <Button Grid.Column="0"
                                             Click="Like_Comment">
-                                        <StackPanel>
-                                            <TextBlock>Likes</TextBlock>
+                                        <StackPanel Orientation="Horizontal"
+                                                    Spacing="10">
+                                            <Image Source="/Assets/Images/reactions/like_active.png"
+                                                   Width="25"/>
+                                            <!--<TextBlock>Likes</TextBlock>-->
                                             <TextBlock Text="{x:Bind likes, Mode=OneWay}" Grid.Row="1"></TextBlock>
-                                         </StackPanel>
+                                        </StackPanel>
                                     </Button>
                                     <Button Grid.Column="1"
                                             Margin="20 0 0 0"
                                             Click="Dislike_Comment">
-                                        <StackPanel>
-                                            <TextBlock>Dislikes</TextBlock>
+                                        <StackPanel Orientation="Horizontal"
+                                                    Spacing="10">
+                                            <Image Source="/Assets/Images/reactions/dislike_active.png"
+                                                   Width="25"/>
+                                            <!--<TextBlock>Dislikes</TextBlock>-->
                                             <TextBlock Text="{x:Bind dislikes, Mode=OneWay}" Grid.Row="1"></TextBlock>
                                         </StackPanel>
                                     </Button>
