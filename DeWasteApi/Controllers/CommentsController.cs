@@ -25,9 +25,9 @@ namespace DeWasteApi.Controllers
         {
             using (_context)
             {
-                return _context.comments != null ?
-                            Json(await _context.comments.ToListAsync()) :
-                            Problem("Entity set 'DeWasteDbContext.Comments'  is null.");
+                return _context.comment != null ?
+                            Json(await _context.comment.ToListAsync()) :
+                            Problem("Entity set 'DeWasteDbContext.comment'  is null.");
             }
         }
 
@@ -35,12 +35,12 @@ namespace DeWasteApi.Controllers
         [HttpGet("{item_id}")]
         public async Task<IActionResult> Details(int? item_id)
         {
-            if (item_id == null || _context.comments == null)
+            if (item_id == null || _context.comment == null)
             {
                 return NotFound();
             }
 
-            var comment = await _context.comments.Where(m => m.item_id == item_id).ToListAsync();
+            var comment = await _context.comment.Where(m => m.item_id == item_id).ToListAsync();
 
             if (comment == null)
             {
@@ -59,7 +59,7 @@ namespace DeWasteApi.Controllers
                 return BadRequest();
             }
 
-            _context.comments.Add(comment);
+            _context.comment.Add(comment);
             await _context.SaveChangesAsync();
 
             return Ok(comment);
@@ -69,12 +69,12 @@ namespace DeWasteApi.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
         {
-            Comment comment = await _context.comments.FirstOrDefaultAsync(x => x.id == id);
+            Comment comment = await _context.comment.FirstOrDefaultAsync(x => x.id == id);
             if (comment == null)
             {
                 return NotFound();
             }
-            _context.comments.Remove(comment);
+            _context.comment.Remove(comment);
             await _context.SaveChangesAsync();
             return Ok(comment);
         }
@@ -87,7 +87,7 @@ namespace DeWasteApi.Controllers
             {
                 return BadRequest();
             }
-            if (!_context.comments.Any(x => x.id == comment.id))
+            if (!_context.comment.Any(x => x.id == comment.id))
             {
                 return NotFound();
             }
@@ -99,7 +99,7 @@ namespace DeWasteApi.Controllers
 
         bool CommentExists(int id)
         {
-            return _context.comments.Any(x => x.id == id);
+            return _context.comment.Any(x => x.id == id);
         }
     }
 }

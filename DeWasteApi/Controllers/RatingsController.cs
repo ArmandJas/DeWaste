@@ -20,21 +20,21 @@ namespace DeWasteApi.Controllers
         [HttpGet]
         public IActionResult Index()
         {
-            return _context.ratings != null ?
-                        Json(_context.ratings) :
-                        Problem("Entity set 'DeWasteDbContext.Ratings'  is null.");
+            return _context.rating != null ?
+                        Json(_context.rating) :
+                        Problem("Entity set 'DeWasteDbContext.rating'  is null.");
         }
 
         //get rating by comment id and user id
         [HttpGet("{comment_id}/{user_id}")]
         public IActionResult Details(int? comment_id, string? user_id)
         {
-            if (comment_id == null || user_id == null || _context.ratings == null)
+            if (comment_id == null || user_id == null || _context.rating == null)
             {
                 return NotFound();
             }
 
-            var rating = _context.ratings
+            var rating = _context.rating
                 .FirstOrDefault(m => m.comment_id == comment_id && m.user_id == user_id);
 
             return Json(rating);
@@ -44,12 +44,12 @@ namespace DeWasteApi.Controllers
         [HttpPost]
         public IActionResult Create([FromBody] Rating rating)
         {
-            if (rating == null || _context.ratings == null)
+            if (rating == null || _context.rating == null)
             {
                 return NotFound();
             }
 
-            _context.ratings.Add(rating);
+            _context.rating.Add(rating);
             _context.SaveChanges();
 
             return Json(rating);
@@ -59,12 +59,12 @@ namespace DeWasteApi.Controllers
         [HttpPut]
         public IActionResult Update([FromBody] Rating rating)
         {
-            if (rating == null || _context.ratings == null)
+            if (rating == null || _context.rating == null)
             {
                 return NotFound();
             }
 
-            var ratingToUpdate = _context.ratings.FirstOrDefault(x => x.comment_id == rating.comment_id && x.user_id == rating.user_id);
+            var ratingToUpdate = _context.rating.FirstOrDefault(x => x.comment_id == rating.comment_id && x.user_id == rating.user_id);
             if (ratingToUpdate == null)
             {
                 return NotFound();
@@ -80,18 +80,18 @@ namespace DeWasteApi.Controllers
         [HttpDelete("{comment_id}/{user_id}")]
         public IActionResult Delete(int? comment_id, string? user_id)
         {
-            if (comment_id == null || user_id == null || _context.ratings == null)
+            if (comment_id == null || user_id == null || _context.rating == null)
             {
                 return NotFound();
             }
 
-            var rating = _context.ratings.FirstOrDefault(x => x.comment_id == comment_id && x.user_id == user_id);
+            var rating = _context.rating.FirstOrDefault(x => x.comment_id == comment_id && x.user_id == user_id);
             if (rating == null)
             {
                 return NotFound();
             }
 
-            _context.ratings.Remove(rating);
+            _context.rating.Remove(rating);
             _context.SaveChanges();
 
             return Json(rating);

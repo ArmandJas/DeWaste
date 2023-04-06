@@ -20,21 +20,21 @@ namespace DeWasteApi.Controllers
         [HttpGet]
         public async Task<IActionResult> SimilarItems()
         {
-            return _context.items != null ?
-                        Json(await _context.items.Select(x => new { x.id, x.name }).ToListAsync()) :
-                        Problem("Entity set 'DeWasteDbContext.Items'  is null.");
+            return _context.item != null ?
+                        Json(await _context.item.Select(x => new { x.id, x.name }).ToListAsync()) :
+                        Problem("Entity set 'DeWasteDbContext.item'  is null.");
         }
 
 
         [HttpGet("{name}")]
         public async Task<IActionResult> SimilarItem(string? name)
         {
-            if (name == null || _context.items == null)
+            if (name == null || _context.item == null)
             {
                 return NotFound();
             }
 
-            var items = await _context.items
+            var items = await _context.item
                 .Where(m => m.name.ToLower().Contains(name)).Select(x => new { x.id, x.name})
                 .ToListAsync();
             if (items == null)

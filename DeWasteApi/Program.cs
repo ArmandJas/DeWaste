@@ -41,7 +41,7 @@ app.Run();
 
 //try to get intercepted
 var db = app.Services.GetService<DeWasteDbContext>();
-var items = db.items.ToList();
+var items = db.item.ToList();
 
 
 public class ApiExplorerIgnores : IActionModelConvention

@@ -16,18 +16,18 @@ namespace DeWasteApi.Data
 
             optionsBuilder.AddInterceptors(new TimeLogInterceptor());
 
-            optionsBuilder.UseNpgsql("Server=database-1.cmqb7wvgno7f.eu-west-2.rds.amazonaws.com;Port=5432;Database=postgres;User Id=postgres;Password=dewaste12;");
+            optionsBuilder.UseNpgsql("Server=193.219.91.103;Port=1353;Database=dewasted;User Id=postgres;Password=cisco;");
 
         }
 
 
 
 
-        public DbSet<Category> categories { get; set; }
-        public DbSet<Item> items { get; set; }
-        public DbSet<Item_Category> items_categories { get; set; }
-        public DbSet<Comment> comments { get; set; } = default!;
-        public DbSet<Rating> ratings { get; set; }
+        public DbSet<Category> category { get; set; }
+        public DbSet<Item> item { get; set; }
+        public DbSet<Item_Category> item_category { get; set; }
+        public DbSet<Comment> comment { get; set; } = default!;
+        public DbSet<Rating> rating { get; set; }
     }
 
     public class MyLoggerFactory
