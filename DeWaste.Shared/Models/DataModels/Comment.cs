@@ -22,8 +22,8 @@ namespace DeWaste.Models.DataModels
 
 
         [JsonIgnore]
-        private string _user_id;
-        public string user_id
+        private Guid _user_id;
+        public Guid user_id
         {
             get => _user_id;
             set
@@ -46,8 +46,8 @@ namespace DeWaste.Models.DataModels
         }
 
         [JsonIgnore]
-        public long _timestamp { get; set; }
-        public long timestamp
+        public DateTimeOffset _timestamp { get; set; }
+        public DateTimeOffset timestamp
         {
             get => _timestamp;
             set
