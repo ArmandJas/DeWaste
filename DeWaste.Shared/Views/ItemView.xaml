@@ -1499,8 +1499,13 @@
                                             Click="Like_Comment">
                                         <StackPanel Orientation="Horizontal"
                                                     Spacing="10">
-                                            <Image Source="/Assets/Images/reactions/like_active.png"
-                                                   Width="25"/>
+                                            <Grid>
+                                                <Image Source="/Assets/Images/reactions/like_inactive.png"
+                                                       Width="25"/>
+                                                <Image Source="/Assets/Images/reactions/like_active.png"
+                                                       Width="25"
+                                                       Visibility="{x:Bind isLiked, Mode=OneWay}"/>
+                                            </Grid>
                                             <!--<TextBlock>Likes</TextBlock>-->
                                             <TextBlock Text="{x:Bind likes, Mode=OneWay}" Grid.Row="1"></TextBlock>
                                         </StackPanel>
@@ -1510,8 +1515,13 @@
                                             Click="Dislike_Comment">
                                         <StackPanel Orientation="Horizontal"
                                                     Spacing="10">
-                                            <Image Source="/Assets/Images/reactions/dislike_active.png"
-                                                   Width="25"/>
+                                            <Grid>
+                                                <Image Source="/Assets/Images/reactions/dislike_inactive.png"
+                                                       Width="25"/>
+                                                <Image Source="/Assets/Images/reactions/dislike_active.png"
+                                                       Width="25"
+                                                       Visibility="{x:Bind isDisliked, Mode=OneWay}"/>
+                                            </Grid>
                                             <!--<TextBlock>Dislikes</TextBlock>-->
                                             <TextBlock Text="{x:Bind dislikes, Mode=OneWay}" Grid.Row="1"></TextBlock>
                                         </StackPanel>
