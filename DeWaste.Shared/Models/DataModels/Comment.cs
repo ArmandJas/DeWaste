@@ -95,9 +95,29 @@ namespace DeWaste.Models.DataModels
 
 
         [JsonIgnore]
-        public bool isLiked = false;
+        private bool _isLiked = false;
+        public bool isLiked
+        {
+            get => _isLiked;
+            set
+            {
+                _isLiked = value;
+                OnPropertyChanged("isLiked");
+            }
+        }
+
         [JsonIgnore]
-        public bool isDisliked = false;
+        private bool _isDisliked = false;
+        public bool isDisliked
+        {
+            get => _isDisliked;
+            set
+            {
+                _isDisliked = value;
+                OnPropertyChanged("isDisliked");
+            }
+        }
+
         [JsonIgnore]
         public bool isUsersComment;
 

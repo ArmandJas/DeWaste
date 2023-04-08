@@ -79,39 +79,13 @@ namespace DeWaste.Models.ViewModels
         public async Task LikeComment(Comment comment)
         {
             IDataHandler datahandler = container.GetService(typeof(IDataHandler)) as IDataHandler;
-            Comment newComment = await datahandler.LikeComment(comment);
-            ObservableCollection<Comment> newComments = new ObservableCollection<Comment>();
-            foreach (Comment c in Comments)
-            {
-                if (c.id == comment.id)
-                {
-                    newComments.Add(newComment);
-                }
-                else
-                {
-                    newComments.Add(c);
-                }
-            }
-            Comments = newComments;
+            await datahandler.LikeComment(comment);
         }
 
         public async Task DislikeComment(Comment comment)
         {
             IDataHandler datahandler = container.GetService(typeof(IDataHandler)) as IDataHandler;
-            Comment newComment = await datahandler.DislikeComment(comment);
-            ObservableCollection<Comment> newComments = new ObservableCollection<Comment>();
-            foreach (Comment c in Comments)
-            {
-                if (c.id == comment.id)
-                {
-                    newComments.Add(newComment);
-                }
-                else
-                {
-                    newComments.Add(c);
-                }
-            }
-            Comments = newComments;
+            await datahandler.DislikeComment(comment);;
         }
 
 
