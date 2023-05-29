@@ -4,6 +4,7 @@
     <OutputType Condition="'$(Configuration)'=='Debug'">Exe</OutputType>
     <TargetFramework>net6.0-windows</TargetFramework>
     <UseWPF>true</UseWPF>
+	<EnableWindowsTargeting>true</EnableWindowsTargeting>
   </PropertyGroup>
   <ItemGroup Label="AssemblyInfo">
     <AssemblyAttribute Include="System.Runtime.InteropServices.ComVisibleAttribute">
